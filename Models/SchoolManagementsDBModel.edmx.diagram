@@ -6,10 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="23f0978aa504468499fcd4743506072c" Name="Diagram1">
         <EntityTypeShape EntityType="SchoolManagment_DBModel.Course" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolManagment_DBModel.Enrollment" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolManagment_DBModel.Student" Width="1.5" PointX="5.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagment_DBModel.Enrollment" Width="1.5" PointX="3.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagment_DBModel.Student" Width="1.5" PointX="7.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="SchoolManagment_DBModel.FK_dbo_Enrollment_dbo_Course_CourseID" ManuallyRouted="false" />
         <AssociationConnector Association="SchoolManagment_DBModel.FK_dbo_Enrollment_dbo_Student_StudentID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SchoolManagment_DBModel.Lecturer" Width="1.5" PointX="4" PointY="3.625" />
+        <AssociationConnector Association="SchoolManagment_DBModel.FK_dbo_Enrollment_dbo_Lecturer_LecturerID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
