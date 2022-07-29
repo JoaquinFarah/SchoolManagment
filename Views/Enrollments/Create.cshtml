@@ -35,7 +35,12 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Ajax.BeginForm("AddStudent", "Enrollments", new AjaxOptions{
+    HttpMethod = "POST",
+    OnSuccess = "Added",
+    OnFailure = "Failed"
+
+}))
 {
     @Html.AntiForgeryToken()
     

@@ -65,6 +65,26 @@ namespace SchoolManagment.Controllers
             ViewBag.LecturerID = new SelectList(db.Lecturers, "LecturerID", "First_Name", enrollment.LecturerID);
             return View(enrollment);
         }
+        [HttpPost]
+        public async Task<JsonResult> AddStudent([Bind(Include = "CourseID,StudentID")] Enrollment enrollment)
+        { 
+            try
+            {
+                var isEnrolled = db.Enrollments.Any(q => q.CourseID == enrollment.CourseID && q.StudentID == enrollment.StudentID);
+                if (ModelState.IsValid && isEnrolled == false)
+                {
+                    db.Enrollments.Add(enrollment);
+                    await db.SaveChangesAsync();
+                    return Json(new { IsSuccess = true, Message = "Student added successfully"}, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { IsSuccess = false, Message = "Student is already enrolled" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { IsSuccess = false, Message = "Please contact your administrator" }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
         // GET: Enrollments/Edit/5
         public async Task<ActionResult> Edit(int? id)
@@ -132,8 +152,7 @@ namespace SchoolManagment.Controllers
         [HttpPost]
         public JsonResult GetStudents(string term)
         {
-            var students = db.Students.Select(q => new
-            {
+            var students = db.Students.Select(q => new {
                 Name = q.FirstName + " " + q.LastName,
                 Id = q.StudentID
             }).Where(q => q.Name.Contains(term));
